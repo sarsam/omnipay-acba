@@ -1,0 +1,33 @@
+{
+  "name": "sarsam/omnipay-acba",
+  "type": "library",
+  "description": "Acba gateway for Omnipay payment processing library",
+  "keywords": [
+    "gateway",
+    "merchant",
+    "omnipay",
+    "pay",
+    "payment",
+    "Acba",
+    "purchase"
+  ],
+  "homepage": "https://github.com/sarsam/omnipay-acba",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Samvel Sargsyan",
+      "email": "sarsamvel1993@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Omnipay\\Acba\\": "src/"
+    }
+  },
+  "require": {
+    "omnipay/common": "^3"
+  },
+  "require-dev": {
+    "omnipay/tests": "^3"
+  }
+}
