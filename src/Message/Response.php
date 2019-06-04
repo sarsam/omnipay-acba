@@ -15,6 +15,9 @@ use Omnipay\Common\Message\RedirectResponseInterface;
  */
 class Response extends AbstractResponse implements RedirectResponseInterface
 {
+    const DEPOSITED = 2;
+    const NO_ERROR = 0;
+
     /**
      * Request id
      *
@@ -41,7 +44,18 @@ class Response extends AbstractResponse implements RedirectResponseInterface
      */
     public function isSuccessful()
     {
-        return $this->getCode() == 0;
+        return $this->getCode() == self::NO_ERROR;
+    }
+
+    /**
+     * Is the orderStatus completed?
+     * Full authorization of the order amount
+     *
+     * @return bool
+     */
+    public function isCompleted()
+    {
+        return $this->getOrderStatus() == self::DEPOSITED;
     }
 
     /**
@@ -81,7 +95,7 @@ class Response extends AbstractResponse implements RedirectResponseInterface
     }
 
     /**
-     * Get the orderNumber reference
+     * Get the orderNumber reference.
      *
      * @return mixed
      */
@@ -89,6 +103,10 @@ class Response extends AbstractResponse implements RedirectResponseInterface
     {
         if (isset($this->data['OrderNumber'])) {
             return $this->data['OrderNumber'];
+        }
+
+        if (isset($this->data['orderNumber'])) {
+            return $this->data['orderNumber'];
         }
 
         return null;
@@ -105,6 +123,20 @@ class Response extends AbstractResponse implements RedirectResponseInterface
     {
         if (!$this->isSuccessful() && isset($this->data['errorMessage'])) {
             return $this->data['errorMessage'];
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the orderStatus.
+     *
+     * @return |null
+     */
+    public function getOrderStatus()
+    {
+        if (isset($this->data['orderStatus'])) {
+            return $this->data['orderStatus'];
         }
 
         return null;
