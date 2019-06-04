@@ -84,7 +84,7 @@ class RegisterRequest extends AbstractRequest
         $data = parent::getData();
 
         $data['orderNumber'] = $this->getTransactionId();
-        $data['amount'] = $this->getAmount();
+        $data['amount'] = $this->getAmountInteger();
         $data['returnUrl'] = $this->getReturnUrl();
 
         if ($this->getCurrency()) {
@@ -123,6 +123,6 @@ class RegisterRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint . '/register.do';
+        return $this->getUrl() . '/register.do';
     }
 }

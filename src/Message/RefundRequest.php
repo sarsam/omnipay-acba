@@ -14,7 +14,8 @@ class RefundRequest extends AbstractRequest
 
         $data = parent::getData();
 
-        $data['amount'] = $this->getAmount();
+        $data['orderId'] = $this->getTransactionId();
+        $data['amount'] = $this->getAmountInteger();
 
         return $data;
     }
@@ -24,6 +25,6 @@ class RefundRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint . '/refunds';
+        return $this->getUrl() . '/refunds';
     }
 }

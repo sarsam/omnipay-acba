@@ -4,6 +4,7 @@ namespace Omnipay\Acba\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RequestInterface;
+use Omnipay\Common\Message\RedirectResponseInterface;
 
 /**
  * Acba Response.
@@ -12,7 +13,7 @@ use Omnipay\Common\Message\RequestInterface;
  *
  * @see \Omnipay\Acba\Gateway
  */
-class Response extends AbstractResponse
+class Response extends AbstractResponse implements RedirectResponseInterface
 {
     /**
      * Request id
@@ -43,11 +44,19 @@ class Response extends AbstractResponse
         return $this->getCode() == 0;
     }
 
+    /**
+     * @return bool
+     */
     public function isRedirect()
     {
         return isset($this->data['formUrl']) ? true : false;
     }
 
+    /**
+     * Get response redirect url
+     *
+     * @return string
+     */
     public function getRedirectUrl()
     {
         return $this->data['formUrl'];
@@ -60,7 +69,29 @@ class Response extends AbstractResponse
      */
     public function getTransactionReference()
     {
-        return $this->data['orderNumber'];
+        if (isset($this->data['orderId'])) {
+            return $this->data['orderId'];
+        }
+
+        if (isset($this->orderId)) {
+            return $this->orderId;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the orderNumber reference
+     *
+     * @return mixed
+     */
+    public function getOrderNumberReference()
+    {
+        if (isset($this->data['OrderNumber'])) {
+            return $this->data['OrderNumber'];
+        }
+
+        return null;
     }
 
     /**
@@ -72,12 +103,31 @@ class Response extends AbstractResponse
      */
     public function getMessage()
     {
-        return $this->data['errorMessage']  ;
+        if (!$this->isSuccessful() && isset($this->data['errorMessage'])) {
+            return $this->data['errorMessage'];
+        }
+
+        return null;
     }
 
+    /**
+     * Get the error code from the response.
+     *
+     * Returns null if the request was successful.
+     *
+     * @return string|null
+     */
     public function getCode()
     {
-        return $this->data['errorCode'];
+        if (!$this->isSuccessful() && isset($this->data['errorCode'])) {
+            return $this->data['errorCode'];
+        }
+
+        if (!$this->isSuccessful() && isset($this->data['ErrorCode'])) {
+            return $this->data['ErrorCode'];
+        }
+
+        return null;
     }
 
     /**

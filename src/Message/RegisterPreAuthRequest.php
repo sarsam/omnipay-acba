@@ -79,11 +79,11 @@ class RegisterPreAuthRequest extends AbstractRequest
      */
     public function getData()
     {
-        $this->validate('orderNumber', 'amount', 'returnUrl');
+        $this->validate('transactionId', 'amount', 'returnUrl');
 
         $data = parent::getData();
 
-        $data['orderNumber'] = $this->getTransactionReference();
+        $data['orderNumber'] = $this->getTransactionId();
         $data['amount'] = $this->getAmount();
         $data['returnUrl'] = $this->getReturnUrl();
 
@@ -123,6 +123,6 @@ class RegisterPreAuthRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint . '/registerPreAuth.do';
+        return $this->getUrl() . '/registerPreAuth.do';
     }
 }

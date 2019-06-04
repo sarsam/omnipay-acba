@@ -57,7 +57,7 @@ class Gateway extends AbstractGateway
      */
     public function setUserName($value)
     {
-        return $this->setParameter('username', $value);
+        return $this->setParameter('userame', $value);
     }
 
     /**
@@ -91,6 +91,17 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * Create RegisterPreAuth Request.
+     *
+     * @param  array $parameters
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function registerPreAuth(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Acba\Message\RegisterPreAuthRequest', $parameters);
+    }
+
+    /**
      * Create GetOrderStatus Request.
      *
      * @param  array $parameters
@@ -107,7 +118,7 @@ class Gateway extends AbstractGateway
      * @param  array $parameters
      * @return \Omnipay\Common\Message\AbstractRequest
      */
-    public function orderStatusExtended(array $parameters = array())
+    public function getOrderStatusExtended(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Acba\Message\GetOrderStatusExtendedRequest', $parameters);
     }
@@ -120,7 +131,18 @@ class Gateway extends AbstractGateway
      */
     public function verifyEnrollment(array $parameters = array())
     {
-        return $this->createRequest('\Omnipay\Acba\Message\verifyEnrollmentRequest', $parameters);
+        return $this->createRequest('\Omnipay\Acba\Message\VerifyEnrollmentRequest', $parameters);
+    }
+
+    /**
+     * Create Deposit Request.
+     *
+     * @param array $parameters
+     * @return \Omnipay\Common\Message\AbstractRequest
+     */
+    public function deposit(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Acba\Message\DepositRequest', $parameters);
     }
 
     /**

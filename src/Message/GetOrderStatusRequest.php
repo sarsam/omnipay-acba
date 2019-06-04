@@ -37,6 +37,6 @@ class GetOrderStatusRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint . '/getOrderStatus.do';
+        return $this->getUrl() . '/getOrderStatus.do';
     }
 }

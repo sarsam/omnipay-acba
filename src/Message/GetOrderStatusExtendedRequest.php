@@ -27,6 +27,8 @@ class GetOrderStatusExtendedRequest extends AbstractRequest
         if ($this->getLanguage()) {
             $data['language'] = $this->getLanguage();
         }
+
+        return $data;
     }
 
     /**
@@ -34,6 +36,6 @@ class GetOrderStatusExtendedRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint . '/getOrderStatusExtended.do';
+        return $this->getUrl() . '/getOrderStatusExtended.do';
     }
 }

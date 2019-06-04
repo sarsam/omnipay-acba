@@ -15,8 +15,8 @@ abstract class AbstractRequest extends CommonAbstractRequest
      *
      * @var string URL
      */
-    protected $endpoint = 'https://test.paymentgate.ru/ipaytest/rest/';
-    protected $testEndpoint = 'https://test.paymentgate.ru/ipaytest/rest/';
+    protected $endpoint = 'https://ipaytest.arca.am:8444';
+    protected $testEndpoint = 'https://ipaytest.arca.am:8445/payment/rest';
 
     /**
      * @return mixed
@@ -57,6 +57,16 @@ abstract class AbstractRequest extends CommonAbstractRequest
     }
 
     abstract public function getEndpoint();
+
+    /**
+     * Get url. Depends on  test mode.
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->getTestMode() ? $this->testEndpoint : $this->endpoint;
+    }
 
     /**
      * Get HTTP Method.
@@ -126,9 +136,13 @@ abstract class AbstractRequest extends CommonAbstractRequest
      */
     public function sendData($data)
     {
-//        $headers = array('Authorization' => 'Basic ' . base64_encode($this->getApiKey() . ':'));
+        $headers = [
+            'Content-Type' => 'application/x-www-form-urlencoded',
+        ];
+
         $body = $data ? http_build_query($data, '', '&') : null;
-        $httpResponse = $this->httpClient->request($this->getHttpMethod(), $this->getEndpoint(), [], $body);
+
+        $httpResponse = $this->httpClient->request($this->getHttpMethod(), $this->getEndpoint(), $headers, $body);
 
         return $this->createResponse($httpResponse->getBody()->getContents(), $httpResponse->getHeaders());
     }
@@ -145,7 +159,7 @@ abstract class AbstractRequest extends CommonAbstractRequest
 
     public function getData()
     {
-        $this->validate('userName', 'password');
+        $this->validate('username', 'password');
 
         return [
             'userName' => $this->getUserName(),

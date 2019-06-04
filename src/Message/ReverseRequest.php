@@ -33,6 +33,6 @@ class ReverseRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint . '/reverse.do';
+        return $this->getUrl() . '/reverse.do';
     }
 }

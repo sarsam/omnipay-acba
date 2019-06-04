@@ -51,6 +51,6 @@ class VerifyEnrollmentRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->endpoint . '/verifyEnrollment.do';
+        return $this->getUrl() . '/verifyEnrollment.do';
     }
 }
