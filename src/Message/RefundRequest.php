@@ -25,6 +25,6 @@ class RefundRequest extends AbstractRequest
      */
     public function getEndpoint()
     {
-        return $this->getUrl() . '/refunds';
+        return $this->getUrl() . '/refund.do';
     }
 }
