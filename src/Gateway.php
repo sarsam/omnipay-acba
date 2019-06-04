@@ -57,7 +57,7 @@ class Gateway extends AbstractGateway
      */
     public function setUserName($value)
     {
-        return $this->setParameter('userame', $value);
+        return $this->setParameter('username', $value);
     }
 
     /**

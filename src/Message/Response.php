@@ -119,11 +119,11 @@ class Response extends AbstractResponse implements RedirectResponseInterface
      */
     public function getCode()
     {
-        if (!$this->isSuccessful() && isset($this->data['errorCode'])) {
+        if (isset($this->data['errorCode'])) {
             return $this->data['errorCode'];
         }
 
-        if (!$this->isSuccessful() && isset($this->data['ErrorCode'])) {
+        if (isset($this->data['ErrorCode'])) {
             return $this->data['ErrorCode'];
         }
 
