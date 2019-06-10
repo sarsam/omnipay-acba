@@ -11,11 +11,17 @@ use \Omnipay\Common\Message\AbstractRequest AS CommonAbstractRequest;
 abstract class AbstractRequest extends CommonAbstractRequest
 {
     /**
-     * Live or Test Endpoint URL.
+     * Live Endpoint URL.
      *
      * @var string URL
      */
-    protected $endpoint = 'https://ipaytest.arca.am:8444';
+    protected $endpoint = 'https://ipay.arca.am/payment/rest';
+
+    /**
+     * Test Endpoint URL.
+     *
+     * @var string
+     */
     protected $testEndpoint = 'https://ipaytest.arca.am:8445/payment/rest';
 
     /**

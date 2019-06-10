@@ -113,22 +113,6 @@ class Response extends AbstractResponse implements RedirectResponseInterface
     }
 
     /**
-     * Get the error message from the response.
-     *
-     * Returns null if the request was successful.
-     *
-     * @return string|null
-     */
-    public function getMessage()
-    {
-        if (!$this->isSuccessful() && isset($this->data['errorMessage'])) {
-            return $this->data['errorMessage'];
-        }
-
-        return null;
-    }
-
-    /**
      * Get the orderStatus.
      *
      * @return |null
@@ -139,6 +123,25 @@ class Response extends AbstractResponse implements RedirectResponseInterface
             return $this->data['orderStatus'];
         }
 
+        return null;
+    }
+
+    /**
+     * Get the error message from the response.
+     *
+     * Returns null if the request was successful.
+     *
+     * @return string|null
+     */
+    public function getMessage()
+    {
+        if (isset($this->data['errorMessage'])) {
+            return $this->data['errorMessage'];
+        }
+
+        if (isset($this->data['ErrorMessage'])) {
+            return $this->data['ErrorMessage'];
+        }
         return null;
     }
 
