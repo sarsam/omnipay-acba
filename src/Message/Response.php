@@ -44,6 +44,20 @@ class Response extends AbstractResponse implements RedirectResponseInterface
      */
     public function isSuccessful()
     {
+        if ($this->getOrderStatus()) {
+            return $this->isCompleted() && $this->isNotError();
+        }
+
+        return $this->isNotError();
+    }
+
+    /**
+     * Is the response no error?
+     *
+     * @return bool
+     */
+    public function isNotError()
+    {
         return $this->getCode() == self::NO_ERROR;
     }
 
@@ -160,6 +174,20 @@ class Response extends AbstractResponse implements RedirectResponseInterface
 
         if (isset($this->data['ErrorCode'])) {
             return $this->data['ErrorCode'];
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the action code description from the response.
+     *
+     * @return string|null
+     */
+    public function getActionCodeDescription()
+    {
+        if (isset($this->data['actionCodeDescription'])) {
+            return $this->data['actionCodeDescription'];
         }
 
         return null;
