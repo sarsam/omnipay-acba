@@ -1,6 +1,6 @@
 # Omnipay: Acba
 
-**Acba driver for the Omnipay Laravel payment processing library**
+**Acba bank driver for the Omnipay Laravel payment processing library**
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.5+. This package implements Acba support for Omnipay.
@@ -48,7 +48,7 @@ Or you can simply run
 
 ```
 
-3. Call purchase, it will automatically redirect to iDram's hosted page
+3. Call purchase, it will automatically redirect to acba's hosted page
 
 ```php
 
