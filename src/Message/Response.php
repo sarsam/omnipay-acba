@@ -38,7 +38,7 @@ class Response extends AbstractResponse implements RedirectResponseInterface
     }
 
     /**
-     * Is the transaction successful?
+     * Is the transaction successful
      *
      * @return bool
      */
@@ -52,7 +52,7 @@ class Response extends AbstractResponse implements RedirectResponseInterface
     }
 
     /**
-     * Is the response no error?
+     * Is the response no error
      *
      * @return bool
      */
@@ -62,7 +62,7 @@ class Response extends AbstractResponse implements RedirectResponseInterface
     }
 
     /**
-     * Is the orderStatus completed?
+     * Is the orderStatus completed
      * Full authorization of the order amount
      *
      * @return bool
